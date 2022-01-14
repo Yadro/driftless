@@ -1,11 +1,6 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "8",
-        "browsers": "last 2 versions"
-      },
-      "useBuiltIns": true
-    }]
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    ["@babel/transform-runtime"]
   ]
 }
