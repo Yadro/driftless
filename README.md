@@ -7,7 +7,7 @@ Driftless setInterval and setTimeout replacement for Node and the browser
 ## Usage
 
 ```
-npm install driftless
+npm install git+https://github.com/narze/driftless.git
 ```
 
 ```js
