@@ -9,6 +9,10 @@ export const DEFAULT_CLEAR_TIMEOUT = (...args) => clearTimeout(...args);
 const timerHandles = {};
 let nextId = 0;
 
+export function debugTimers() {
+  console.log(timerHandles, Object.keys(timerHandles).length);
+}
+
 function tryDriftless(id, opts) {
   const {
     atMs,
@@ -29,6 +33,7 @@ function tryDriftless(id, opts) {
     : (
       customSetTimeout(() => {
         // Call the function using setTimeout to ensure asynchrony
+        delete timerHandles[id];
         fn();
       }, 0)
     );
@@ -53,6 +58,13 @@ export function clearDriftless(id, opts = {}) {
     customClearTimeout = DEFAULT_CLEAR_TIMEOUT,
   } = opts;
   customClearTimeout(timerHandles[id]);
+  delete timerHandles[id];
+}
+
+export function clearAllDriftless() {
+  Object.entries(timerHandles).forEach(([id]) => {
+    clearDriftless(id);
+  });
 }
 
 function castToFn(fn) {

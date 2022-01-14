@@ -5,12 +5,20 @@ import {
   setDriftless,
   setDriftlessInterval,
   setDriftlessTimeout,
+  debugTimers,
+  clearAllDriftless,
 } from '../src/driftless';
 
 const EPSILON_MS = 1;
 
 // Number between 0 and 1000
 const randMs = () => Math.floor(Math.random() * 1000);
+
+afterEach(() => {
+  debugTimers();
+  clearAllDriftless();
+  debugTimers();
+});
 
 describe('setDriftless', () => {
   let clock;
